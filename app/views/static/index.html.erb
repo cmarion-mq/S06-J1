@@ -1,13 +1,26 @@
-<h1>Bienvenue petit curieux!</h1>
-<h2> Ici tu trouveras les potins les plus croustillants </h2>
-
-<% @gossips.each do |gossip| %>
-  <div class="card">
-    <div class="card-body">
-      <p class="card-text"> <%="#{gossip.title} écrit par #{gossip.user.first_name}"%></p>
-      <span class="nav-link"> <%= link_to gossip.id, "/gossip/#{gossip.id}", class: "btn btn-primary" %></span>
+<div class= "container">
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-warning>
+      <%= msg %>
     </div>
-  </div>
-<% end %>
-    
+  <% end %>
 
+  <h1>Bienvenue petit curieux!</h1>
+  <h2> Ici tu trouveras les potins les plus croustillants </h2>
+
+  <% @gossips.each do |gossip| %>
+    <div class="card">
+      <div class="card-body">
+        <div class="display-flex">
+          <p class="card-text"> <%="#{gossip.title} écrit par #{gossip.user.first_name}"%>
+          <% if current_user == gossip.user %>
+            <a href="<%= gossip_path(Gossip.find(gossip.id)) %>" class="btn btn-primary">Voir le gossip</a>
+            <a href="<%= edit_gossip_path(Gossip.find(gossip.id)) %>" class="btn btn-primary">Modifier le gossip</a>
+            <a href="<%= gossip_path(Gossip.find(gossip.id)) %>" class="btn btn-primary" data-confirm="êtes-vous sur?" data-method="DELETE">Supprimer le gossip</a>
+          <% end %>
+            </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

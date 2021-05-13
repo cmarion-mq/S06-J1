@@ -6,7 +6,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application' %>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
   </head>
@@ -28,9 +28,25 @@
         <li class="nav-item">
           <span class="nav-link"> <%= link_to "Disabled", '/welcome/first_name' %></span>
         </li>
+        <div class=" nav-item bg.light col-12 d-flex justify-content-end">
+          <span class="nav-item nav-link" ><%= link_to "Register", "/users/new" %></span>
+          <span class="nav-item nav-link" ><%= link_to "Login", "/sessions/new" %></span>
+          <% if session[:user_id] %>
+            <span class="nav-item nav-link" ><%= link_to "Log out", session_path(session[:user_id]), method: :delete%></span>
+          <% end %>
+        </div>
       </ul>
     </div>
   </nav>
     <%= yield %>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2017–2021 Company Name</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Privacy</a></li>
+      <li class="list-inline-item"><a href="#">Terms</a></li>
+      <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+  </footer
   </body>
 </html>
