@@ -12,33 +12,30 @@
   </head>
 
   <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <span class="navbar-brand"> <%= link_to "The Gossip Project (Home)", '/index' %></span>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <span class="nav-link"> <%= link_to "Team", '/team' %></span>
-        </li>
-        <li class="nav-item">
-          <span class="nav-link"> <%= link_to "Contact", '/contact' %></span>
-        </li>
-        <li class="nav-item">
-          <span class="nav-link"> <%= link_to "Disabled", '/welcome/first_name' %></span>
-        </li>
-        <div class=" nav-item bg.light col-12 d-flex justify-content-end">
-          <span class="nav-item nav-link" ><%= link_to "Register", "/users/new" %></span>
-          <span class="nav-item nav-link" ><%= link_to "Login", "/sessions/new" %></span>
-          <% if session[:user_id] %>
-            <span class="nav-item nav-link" ><%= link_to "Log out", session_path(session[:user_id]), method: :delete%></span>
-          <% end %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <div class="navbar-brand col-3" style="margin-left: -25px" id="welcome"><%= link_to "Welcome!", "/index" %></div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav col-10">
+            <span class="nav-item nav-link"><%= link_to "Team", "/team" %></span>
+            <span class="nav-item nav-link"><%= link_to "Contact", "/contact" %></span>
+            <div class=" nav-item bg.light col-12 d-flex justify-content-end">
+              <span class="nav-item nav-link col-2" ><%= link_to "Register", "/users/new" %></span>
+              <%if session[:user_id]%>
+                <span class="nav-item nav-link" ><%= link_to "Log out", session_path(session[:user_id]), method: :delete%></span>
+              <%else%>
+                <span class="nav-item nav-link" ><%= link_to "Login", "/sessions/new" %></span>
+              <% end %>
+          </div>
         </div>
-      </ul>
-    </div>
-  </nav>
+      </div>
+    </nav>
     <%= yield %>
+  </body>
+</html>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
     <p class="mb-1">&copy; 2017–2021 Company Name</p>

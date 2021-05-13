@@ -1,11 +1,5 @@
-<% flash.each do |type, msg| %>
-  <div class="alert alert-warning">
-    <%= msg %>
-  </div>
-<% end %>
-
+<div class="container pt-5">
 <h1>Edit the gossip </h1>
-
 <%= form_for @gossip do |f| %>
   <div class="form-group">
     <label>Titre du gossip</label>
@@ -21,3 +15,4 @@
     <button type="submit"> Modifier le gossip </button>
   </div>
 <% end %>
+</div>

@@ -40,9 +40,9 @@ class GossipsController < ApplicationController
 
   def update
     @gossip = Gossip.find(params[:id])
-    if @gossip.update(title: params[:title], content: params[:content])
-      flash[:success] = "Gossip modifé"
-      redirect_to gossip_path
+    if @gossip = Gossip.find(params[:id])
+      @gossip.update(post_params)
+      redirect_to index_path
     else
       render 'edit'
     end
