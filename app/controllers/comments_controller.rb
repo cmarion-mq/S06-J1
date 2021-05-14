@@ -32,25 +32,33 @@ class CommentsController < ApplicationController
   end
 
   def update
-    @comment = Comment.find(params[:id])
-    @gossip = Gossip.find(params[:gossip_id])
+    if current_user
+      @comment = Comment.find(params[:id])
+      @gossip = Gossip.find(params[:gossip_id])
 
-    if @comment.update(content: params[:content])
+      if @comment.update(content: params[:content])
 
-      flash[:info] = "Gossip successfully modified!"
-      redirect_to gossip_path(@gossip.id)
+        flash[:info] = "Gossip successfully modified!"
+        redirect_to gossip_path(@gossip.id)
+      else
+        render 'edit'
+      end
     else
-      render 'edit'
+      redirect_to "/sessions/new", notice: "Log obligatoire pour créer un gossip"
     end
   end
 
   def destroy
-    @gossip = Gossip.find(params[:gossip_id])
-    @comment = Comment.find(params[:id])
+    if current_user
+      @gossip = Gossip.find(params[:gossip_id])
+      @comment = Comment.find(params[:id])
 
-    @comment.destroy
-    flash[:alert] = "Comment deleted!"
-    redirect_to gossip_path(@gossip.id)
+      @comment.destroy
+      flash[:alert] = "Comment deleted!"
+      redirect_to gossip_path(@gossip.id)
+    else
+      redirect_to "/sessions/new", notice: "Log obligatoire pour créer un gossip"
+    end
   end
 
 end
